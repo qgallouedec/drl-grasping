@@ -2,7 +2,7 @@
 
 
 
-The work presented here reproduces the results presented by [Plappert & al. (2018)](https://arxiv.org/abs/1802.09464). The idea is to use hinsight experience replay (HER) ([Andrychowicz & al. (2017)](http://papers.nips.cc/paper/7090-hindsight-experience-replay)) to learn four basic tasks.
+The work presented tries (but not succeed) to reproduces the results presented by [Plappert & al. (2018)](https://arxiv.org/abs/1802.09464). The idea is to use hinsight experience replay (HER) ([Andrychowicz & al. (2017)](http://papers.nips.cc/paper/7090-hindsight-experience-replay)) to learn four basic tasks.
 
 
 ## Installation
@@ -21,10 +21,11 @@ sudo apt-get update && sudo apt-get install cmake libopenmpi-dev python3-dev zli
 git clone https://github.com/quenting44/drl_grasping.git
 ```
 
-3. create a virtual environment, activate it and upgrade pip
+3. move to this branch, create a virtual environment, activate it and upgrade pip
 
 ```shell
 cd drl_grasping
+git checkout stable-baselines
 python3 -m venv env
 source env/bin/activate
 python -m pip install --upgrade pip
@@ -54,11 +55,13 @@ To train the Fetch robot to learn the pick and place task, run
 mpirun -np 8 python main.py
 ```
 
-The learning is distributed over 8 MPI workers and lasts 80 epochs. The learning data are stored under the `~/log/progress.csv` file.
+The learning is distributed over 8 MPI workers and lasts 80 epochs. The learning data are stored under the `./log/` folder.
+
+To turn the results into `.txt` files, you can run `python read.py`. It creates a table into a `.txt` for every configurations.
 
 ## Results
 
-![](docs/pickandplace.png)
+![](docs/results_four_envs.png)
 
 ## Author
 

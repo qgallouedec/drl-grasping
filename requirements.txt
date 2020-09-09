@@ -1,3 +1,5 @@
--e git+git://github.com/openai/baselines.git#egg=baselines
+gym==0.17.2
+Box2D==2.3.10 
+tensorflow-gpu==1.14
 mujoco-py<2.1,>=2.0
-mpi4py==3.0.3
+stable-baselines[mpi]==2.10.0 
