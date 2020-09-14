@@ -1,9 +1,6 @@
 # Deep Reinforcement Learning for Grasping
 
-
-
 The work presented here reproduces the results presented by [Plappert & al. (2018)](https://arxiv.org/abs/1802.09464). The idea is to use hinsight experience replay (HER) ([Andrychowicz & al. (2017)](http://papers.nips.cc/paper/7090-hindsight-experience-replay)) to learn four basic tasks.
-
 
 ## Installation
 
@@ -48,17 +45,28 @@ pip install -r requirements.txt
 
 ## Usage
 
-To train the Fetch robot to learn the pick and place task, run
+### Train
+
+Define your own hyperparameters at the end of `train.py`. Then, run
 
 ```shell
 mpirun -np 8 python main.py
 ```
 
-The learning is distributed over 8 MPI workers and lasts 80 epochs. The learning data are stored under the `~/log/progress.csv` file.
+The learning is distributed over 8 MPI workers.
+
+### Play
+
+To visualize the policy, make sure to fill the environment name and the path to the policy at the end of the `play.py` file. Then run
+
+```shell
+python play.py
+```
 
 ## Results
 
-![](docs/pickandplace.png)
+With the envrionnement `FetchPickAndPlace-v1`
+![learning curve](docs/pickandplace.png)
 
 ## Author
 
