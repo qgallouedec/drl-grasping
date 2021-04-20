@@ -1,72 +1,68 @@
-# Deep Reinforcement Learning for Grasping
+# Baselines and panda-gym
 
-The work presented here reproduces the results presented by [Plappert & al. (2018)](https://arxiv.org/abs/1802.09464). The idea is to use hinsight experience replay (HER) ([Andrychowicz & al. (2017)](http://papers.nips.cc/paper/7090-hindsight-experience-replay)) to learn four basic tasks.
+Code to train an agent on [`panda-gym` environments](https://github.com/qgallouedec/panda-gym).
 
 ## Installation
 
-The following installation has been tested only on Ubuntu 18.04 LTS
+Tested on Ubunutu 18.04 LTS.
 
 1. install some dependencies
 
-```shell
-sudo apt-get update && sudo apt-get install cmake libopenmpi-dev python3-dev zlib1g-dev
-```
+    ```shell
+    sudo apt-get update && sudo apt-get install cmake libopenmpi-dev python3-dev zlib1g-dev
+    ```
 
 2. clone the repository
 
-```shell
-git clone https://github.com/quenting44/drl_grasping.git
-```
+    ```shell
+    git clone https://github.com/qgallouedec/drl_grasping
+    ```
 
 3. create a virtual environment, activate it and upgrade pip
 
-```shell
-cd drl_grasping
-python3 -m venv env
-source env/bin/activate
-python -m pip install --upgrade pip
-```
+    ```shell
+    cd drl_grasping
+    python3 -m venv env
+    source env/bin/activate
+    python -m pip install --upgrade pip
+    ```
 
-4. install tensorflow (or tensorflow-gpu if you have a CUDA-compatible gpu and proper drivers)
+4. install dependecies
 
-```shell
-pip install tensorflow==1.14
-# or
-pip install tensorflow-gpu==1.14
-```
-
-5. install mujoco following the [instructions](https://github.com/openai/mujoco-py#install-mujoco)
-
-6. install the remaining requirements.
-
-```shell
-pip install -r requirements.txt
-```
+    ```shell
+    pip install -r requirements.txt
+    ```
 
 ## Usage
 
 ### Train
 
-Define your own hyperparameters at the end of `train.py`. Then, run
+To train `PandaPickAndPlace-v1` with seed 0 for 500000 timesteps, run
 
 ```shell
-mpirun -np 8 python main.py
+mpirun -np 8 python train.py PandaPickAndPlace-v1 0 500000
 ```
 
-The learning is distributed over 8 MPI workers.
+The learning is distributed over 8 MPI workers. For the moment, this number should not be modified.
 
 ### Play
 
-To visualize the policy, make sure to fill the environment name and the path to the policy at the end of the `play.py` file. Then run
+To play the learned policy, run
 
 ```shell
-python play.py
+python play.py PandaPickAndPlace-v1
 ```
 
-## Results
+### Process the results
 
-With the envrionnement `FetchPickAndPlace-v1`
-![learning curve](docs/pickandplace.png)
+Turn the brut results into `.dat` file, containing timesteps, median and quartiles.
+
+```shell
+python results_to_dat.py
+```
+
+It process all the training done so far.
+
 
 ## Author
 
