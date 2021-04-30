@@ -46,6 +46,7 @@ def train(seed, log_path, save_path, env_id, replay_strategy, timesteps, num_env
         total_timesteps=timesteps,
         network="mlp",
         replay_strategy=replay_strategy,
+        override_params={'n_cycles':10},
     )
 
     # save the model

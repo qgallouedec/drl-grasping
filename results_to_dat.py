@@ -32,8 +32,8 @@ def process(env_id):
     success_rates = np.array(success_rates, dtype=np.float)
     med = np.median(success_rates, axis=0)
     l = len(med)
-    episode_length = 10 if env_id == "PandaStack-v1" else 50
-    n_cycles = 10 if env_id == "PandaReach-v1" else 50
+    episode_length = 100 if env_id == "PandaStack-v1" else 50
+    n_cycles = 10
     n_mpi_workers = 8
     timesteps = np.arange(1, l + 1) * episode_length * n_cycles * n_mpi_workers
     lowq = np.quantile(success_rates, 0.33, axis=0)
